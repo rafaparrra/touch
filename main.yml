@@ -1,8 +1,5 @@
----
-
-- hosts: all
-  remote_user: root
-  
+- name: Create a file
+  hosts: all
   tasks:
   # Registrar una variable
   - name: Check if file exist
