@@ -1,0 +1,32 @@
+---
+
+- hosts: all
+  remote_user: root
+  
+  tasks:
+  # Registrar una variable
+  - name: Check if file exist
+    stat:
+      path: "/rafa/prueba"
+    register: prueba_file
+
+  # Controlled if it exist
+  - name: Controlled if file exist
+    debug:
+      msg: "File exits!"
+    when: prueba_file.stat.exists == True
+
+  # Controlled if it don't exists
+  - name: Controlled if file don´t exist
+    debug:
+      msg: "File don't exists!"
+    when: prueba_file.stat.exists == False
+
+  # Create file if don´t exist
+  - name: Create file
+    file:
+      path: "/rafa/prueba"
+      state: touch
+    when: prueba_file.stat.exists == False
+
+   
